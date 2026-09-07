@@ -1,0 +1,21 @@
+# Core service
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.9.2
+sqlalchemy==2.0.36
+python-multipart==0.0.20
+
+# Engines
+networkx==3.4.2          # camera/road graph, shortest-path plausibility
+numpy==2.1.3
+opencv-python==4.10.0.84 # perspective rectification, CLAHE, blur metric
+
+# Tests
+pytest==8.3.4
+httpx==0.28.1            # FastAPI TestClient
+
+# --- Production ANPR models (not needed for the demo build) ---------------
+# The pipeline talks to a Recognizer protocol, so these are only required
+# when running the YOLO+CRNN backend against real camera frames.
+# ultralytics==8.3.49
+# torch==2.5.1
