@@ -68,6 +68,10 @@ export default {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-down": {
+          "0%": { opacity: "0", transform: "translateY(-6px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         "pulse-ring": {
           "0%": { transform: "scale(0.8)", opacity: "0.7" },
           "70%": { transform: "scale(2.2)", opacity: "0" },
@@ -79,6 +83,7 @@ export default {
       },
       animation: {
         "fade-up": "fade-up 0.4s cubic-bezier(0.16,1,0.3,1) both",
+        "fade-down": "fade-down 0.35s cubic-bezier(0.16,1,0.3,1) both",
         "pulse-ring": "pulse-ring 2.4s cubic-bezier(0.16,1,0.3,1) infinite",
         shimmer: "shimmer 1.6s infinite",
       },

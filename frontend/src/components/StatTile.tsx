@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
 import { GlassPanel } from "./GlassPanel";
 import { cx } from "../lib/cx";
 
@@ -14,14 +13,14 @@ interface Props {
   empty?: boolean;
 }
 
-/** Header KPI tile. Used across summary rows on every screen. */
+/**
+ * Header KPI tile. Used across summary rows on every screen. The enter
+ * animation is pure CSS (`animate-fade-up`, `both` fill) so the content is
+ * never left stuck at opacity 0 if a frame is dropped.
+ */
 export function StatTile({ label, value, hint, accent, icon, empty }: Props) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="animate-fade-up">
       <GlassPanel interactive className="h-full">
         <div className="flex items-start justify-between gap-3">
           <span className="eyebrow">{label}</span>
@@ -42,6 +41,6 @@ export function StatTile({ label, value, hint, accent, icon, empty }: Props) {
           </div>
         )}
       </GlassPanel>
-    </motion.div>
+    </div>
   );
 }

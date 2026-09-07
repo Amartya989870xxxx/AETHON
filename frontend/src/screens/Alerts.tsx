@@ -238,17 +238,18 @@ export function AlertsScreen() {
                   <motion.li
                     key={r.id}
                     layout
-                    initial={r.live ? { opacity: 0, y: -8 } : false}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={false}
                     transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <AlertRow
-                      row={r}
-                      active={r.id === selectedId}
-                      onClick={() =>
-                        setSelectedId(r.id === selectedId ? null : r.id)
-                      }
-                    />
+                    <div className={r.live ? "animate-fade-down" : undefined}>
+                      <AlertRow
+                        row={r}
+                        active={r.id === selectedId}
+                        onClick={() =>
+                          setSelectedId(r.id === selectedId ? null : r.id)
+                        }
+                      />
+                    </div>
                   </motion.li>
                 ))}
               </AnimatePresence>
@@ -342,8 +343,8 @@ function AlertRow({
             )}
           </div>
           <p className="mt-1 truncate text-sm text-ink-100">{row.title}</p>
-          <p className="mt-0.5 text-[11px] text-ink-500">
-            <span className="font-mono">{row.plate}</span>
+          <p className="mt-0.5 text-[11px] text-ink-400">
+            <span className="font-mono text-ink-300">{row.plate}</span>
             {row.camera_id && ` · ${row.camera_id}`} ·{" "}
             {formatRelative(row.created_at)}
           </p>

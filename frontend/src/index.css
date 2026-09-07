@@ -130,9 +130,10 @@
 }
 
 .leaflet-tile {
-  /* CARTO dark_all is already dark; nudge it further down and toward violet
-     so data overlays sit clearly on top. */
-  filter: brightness(0.82) contrast(1.05) saturate(0.72) hue-rotate(8deg);
+  /* Turn the light keyless OSM basemap into a muted night map so the violet
+     data overlays read clearly on top. */
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9)
+    saturate(0.55);
 }
 
 .leaflet-bar,

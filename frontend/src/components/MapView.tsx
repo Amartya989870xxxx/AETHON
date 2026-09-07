@@ -34,9 +34,11 @@ export function MapView({
       preferCanvas
       attributionControl
     >
+      {/* Keyless OSM tiles, darkened to a night basemap by the CSS filter in
+          index.css (.leaflet-tile). No API key, no tile-provider account. */}
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-        attribution='&copy; OpenStreetMap &copy; CARTO'
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; OpenStreetMap contributors'
         maxZoom={19}
       />
       <FitBounds bounds={bounds} />
