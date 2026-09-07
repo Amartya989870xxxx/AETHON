@@ -322,16 +322,6 @@ scripts/        seed.py, demo.py
 docs/           ARCHITECTURE.md · PITCH_SCRIPT.md · HANDOFF.md · SPEC_v2.md
 ```
 
-## Docs
-
-- **`docs/ARCHITECTURE.md`** — full walkthrough: how every component works and
-  why, with the honest limits
-- **`docs/PITCH_SCRIPT.md`** — 5-minute pitch, timed, plus a Q&A bank
-- **`docs/HANDOFF.md`** — slide-by-slide deck guide and quotable numbers
-
-*(These are maintained locally and are not part of this public repository yet
-— ask a teammate for the current copy.)*
-
 ## Stack
 
 FastAPI · SQLAlchemy 2 · NetworkX · OpenCV · NumPy · SQLite (→ PostGIS +
