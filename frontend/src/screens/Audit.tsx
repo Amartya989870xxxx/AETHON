@@ -16,6 +16,7 @@ import type { AuditEntry } from "../api/types";
 const ACTION_COLORS: Record<string, string> = {
   trajectory_query: "#d946ef",
   alert_acknowledged: "#4ade80",
+  alert_raised: "#8b5cf6",
   blacklist_add: "#ff8f4c",
   blacklist_remove: "#5b6070",
 };

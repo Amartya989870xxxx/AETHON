@@ -131,6 +131,13 @@ export function AnalyticsScreen() {
         <ErrorState error={summary.error} onRetry={summary.refetch} />
       )}
 
+      {/* segment trend — full width, it's the "when does this road congest" view */}
+      <SegmentTrend
+        segments={(bottlenecks.data?.bottlenecks ?? []).map(
+          (b) => b.road_segment,
+        )}
+      />
+
       <div className="grid gap-6 lg:grid-cols-2">
         {/* bottlenecks */}
         <GlassPanel>
@@ -144,30 +151,23 @@ export function AnalyticsScreen() {
           )}
         </GlassPanel>
 
-        {/* segment trend */}
-        <SegmentTrend
-          segments={(bottlenecks.data?.bottlenecks ?? []).map(
-            (b) => b.road_segment,
+        {/* OD matrix */}
+        <GlassPanel>
+          <h3 className="eyebrow mb-3">Origin → destination · zone flow</h3>
+          {od.error ? (
+            <ErrorState error={od.error} bare onRetry={od.refetch} />
+          ) : od.initial ? (
+            <Skeleton className="h-64 w-full" />
+          ) : !od.data || od.data.zones.length === 0 ? (
+            <EmptyState
+              title="No OD data for this window"
+              message="Origin-destination flow is aggregated from completed cross-zone trips. Widen the time window or run Recompute."
+            />
+          ) : (
+            <ODMatrixView data={od.data} />
           )}
-        />
+        </GlassPanel>
       </div>
-
-      {/* OD matrix */}
-      <GlassPanel>
-        <h3 className="eyebrow mb-3">Origin → destination · zone flow</h3>
-        {od.error ? (
-          <ErrorState error={od.error} bare onRetry={od.refetch} />
-        ) : od.initial ? (
-          <Skeleton className="h-64 w-full" />
-        ) : !od.data || od.data.zones.length === 0 ? (
-          <EmptyState
-            title="No OD data for this window"
-            message="Origin-destination flow is aggregated from completed cross-zone trips. Widen the time window or run Recompute."
-          />
-        ) : (
-          <ODMatrixView data={od.data} />
-        )}
-      </GlassPanel>
     </div>
   );
 }
@@ -182,7 +182,7 @@ function BottlenecksTable({ rows }: { rows: BottleneckRow[] }) {
     {
       key: "share",
       header: "Congested",
-      width: "w-40",
+      width: "w-32",
       cell: (r) => (
         <Meter
           value={r.congested_share}
@@ -209,6 +209,7 @@ function BottlenecksTable({ rows }: { rows: BottleneckRow[] }) {
       columns={columns}
       rows={rows}
       rowKey={(r) => r.road_segment}
+      minWidth={440}
       empty={
         <p className="py-8 text-center text-xs text-ink-500">
           No segment aggregates in this window.
@@ -237,7 +238,11 @@ function SegmentTrend({ segments }: { segments: string[] }) {
   const data = useMemo(
     () =>
       (series.data?.series ?? []).map((p) => ({
-        t: formatLocal(p.bucket_start, { month: "short", day: "2-digit", hour: "2-digit" }),
+        t: formatLocal(p.bucket_start, {
+          month: "short",
+          day: "2-digit",
+          hour: "2-digit",
+        }),
         congestion: Number((p.congestion_score * 100).toFixed(1)),
         vehicles: p.vehicle_count,
         speed: p.avg_speed_kmph,
@@ -247,41 +252,51 @@ function SegmentTrend({ segments }: { segments: string[] }) {
 
   return (
     <GlassPanel>
-      <div className="mb-3 flex items-center justify-between gap-2">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
         <h3 className="eyebrow">Segment trend</h3>
-        <Select
-          value={segment}
-          onChange={(e) => setSegment(e.target.value)}
-          className="w-auto max-w-[12rem]"
-        >
-          {segments.length === 0 && <option value="">no segments</option>}
-          {segments.map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </Select>
+        <div className="flex items-center gap-3">
+          <Legend swatch="#8b5cf6" label="Congestion %" />
+          <Legend swatch="#5cd0c0" label="Speed km/h" />
+          <Select
+            value={segment}
+            onChange={(e) => setSegment(e.target.value)}
+            className="w-auto max-w-[14rem]"
+          >
+            {segments.length === 0 && <option value="">no segments</option>}
+            {segments.map((s) => (
+              <option key={s} value={s}>
+                {s}
+              </option>
+            ))}
+          </Select>
+        </div>
       </div>
 
       {series.error ? (
         <ErrorState error={series.error} bare onRetry={series.refetch} />
       ) : !segment ? (
-        <EmptyState title="Pick a segment" message="Choose a road above to see its congestion over time." />
+        <EmptyState
+          title="Pick a segment"
+          message="Choose a road above to see its congestion over time."
+        />
       ) : series.initial ? (
-        <Skeleton className="h-56 w-full" />
+        <Skeleton className="h-64 w-full" />
       ) : data.length === 0 ? (
         <EmptyState
           title="No buckets in window"
           message={`No aggregates for ${segment} in the selected time range.`}
         />
       ) : (
-        <div className="h-56 w-full">
+        <div className="mt-2 h-64 w-full">
           <ResponsiveContainer>
-            <AreaChart data={data} margin={{ top: 6, right: 8, bottom: 0, left: -18 }}>
+            <AreaChart
+              data={data}
+              margin={{ top: 8, right: 12, bottom: 0, left: 4 }}
+            >
               <defs>
                 <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.4} />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.45} />
+                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -290,14 +305,24 @@ function SegmentTrend({ segments }: { segments: string[] }) {
                 tick={{ fill: "#5b6070", fontSize: 10 }}
                 tickLine={false}
                 axisLine={{ stroke: "rgba(255,255,255,0.08)" }}
-                minTickGap={28}
+                minTickGap={40}
               />
               <YAxis
-                tick={{ fill: "#5b6070", fontSize: 10 }}
+                yAxisId="pct"
+                tick={{ fill: "#8b5cf6", fontSize: 10 }}
                 tickLine={false}
                 axisLine={false}
-                width={44}
-                unit="%"
+                width={34}
+                domain={[0, (max: number) => Math.ceil((max + 5) / 10) * 10]}
+                tickFormatter={(v: number) => `${v}`}
+              />
+              <YAxis
+                yAxisId="spd"
+                orientation="right"
+                tick={{ fill: "#5cd0c0", fontSize: 10 }}
+                tickLine={false}
+                axisLine={false}
+                width={34}
               />
               <RTooltip
                 contentStyle={{
@@ -309,6 +334,7 @@ function SegmentTrend({ segments }: { segments: string[] }) {
                 labelStyle={{ color: "#c4c8d4" }}
               />
               <Area
+                yAxisId="pct"
                 type="monotone"
                 dataKey="congestion"
                 name="Congestion"
@@ -316,8 +342,10 @@ function SegmentTrend({ segments }: { segments: string[] }) {
                 strokeWidth={2}
                 fill="url(#cg)"
                 unit="%"
+                isAnimationActive={false}
               />
               <Line
+                yAxisId="spd"
                 type="monotone"
                 dataKey="speed"
                 name="Speed"
@@ -325,12 +353,25 @@ function SegmentTrend({ segments }: { segments: string[] }) {
                 strokeWidth={1.5}
                 dot={false}
                 unit=" km/h"
+                isAnimationActive={false}
               />
             </AreaChart>
           </ResponsiveContainer>
         </div>
       )}
     </GlassPanel>
+  );
+}
+
+function Legend({ swatch, label }: { swatch: string; label: string }) {
+  return (
+    <span className="flex items-center gap-1.5 text-[11px] text-ink-400">
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ backgroundColor: swatch }}
+      />
+      {label}
+    </span>
   );
 }
 

@@ -19,6 +19,8 @@ interface Props<Row> {
   activeKey?: string | number;
   /** Shown in place of the body when `rows` is empty. */
   empty?: ReactNode;
+  /** Min table width in px before the container scrolls. Default 640. */
+  minWidth?: number;
 }
 
 /**
@@ -32,10 +34,14 @@ export function DataTable<Row>({
   onRowClick,
   activeKey,
   empty,
+  minWidth = 640,
 }: Props<Row>) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full min-w-[640px] border-collapse text-sm">
+      <table
+        className="w-full border-collapse text-sm"
+        style={{ minWidth }}
+      >
         <thead>
           <tr className="border-b border-white/10">
             {columns.map((col) => (

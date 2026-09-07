@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { CircleMarker, Polyline, Popup, Tooltip } from "react-leaflet";
 import type { LatLngBoundsExpression, LatLngTuple } from "leaflet";
 import { PageHeader } from "../components/PageHeader";
@@ -28,9 +29,24 @@ import type {
 } from "../api/types";
 
 export function TrajectoryScreen() {
+  const [params, setParams] = useSearchParams();
+  const plate = params.get("plate");
+  const setPlate = useCallback(
+    (next: string | null) => {
+      setParams(
+        (p) => {
+          if (next) p.set("plate", next);
+          else p.delete("plate");
+          return p;
+        },
+        { replace: true },
+      );
+    },
+    [setParams],
+  );
+
   const [term, setTerm] = useState("");
   const [debounced, setDebounced] = useState("");
-  const [plate, setPlate] = useState<string | null>(null);
   const win = useWindowParams();
 
   useEffect(() => {
