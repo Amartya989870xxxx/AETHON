@@ -34,14 +34,18 @@ export default {
           200: "#c4c8d4",
           100: "#e7e9f0",
         },
-        // Violet accent family (Argus selection + dock glow).
-        violet: {
-          400: "#a855f7",
-          500: "#8b5cf6",
-          600: "#7c3aed",
+        // Electric-cyan accent — surveillance/HUD console on the near-black
+        // ground. Kept clear of the semantic signal hues below.
+        accent: {
+          300: "#67e8f9",
+          400: "#22d3ee",
+          500: "#06b6d4",
+          600: "#0891b2",
         },
-        fuchsia: {
-          500: "#d946ef",
+        // Electric-blue secondary, for a two-tone highlight where cyan alone
+        // would read flat (route endpoints, impossible-travel, audit lookups).
+        spark: {
+          500: "#3b82f6",
         },
         // Semantic signal colors for badges / congestion / severity.
         signal: {
@@ -50,15 +54,15 @@ export default {
           medium: "#ffcc4d",
           low: "#5cd0c0",
           ok: "#4ade80",
-          info: "#8b5cf6",
+          info: "#22d3ee",
         },
       },
       boxShadow: {
         glass:
           "0 8px 32px rgba(0,0,0,0.45), inset 0 1px rgba(255,255,255,0.08)",
         "glass-hover":
-          "0 12px 40px rgba(0,0,0,0.55), 0 0 30px rgba(139,92,246,0.18), inset 0 1px rgba(255,255,255,0.10)",
-        glow: "0 0 24px rgba(139,92,246,0.28)",
+          "0 12px 40px rgba(0,0,0,0.55), 0 0 30px rgba(34,211,238,0.18), inset 0 1px rgba(255,255,255,0.10)",
+        glow: "0 0 24px rgba(34,211,238,0.30)",
       },
       transitionTimingFunction: {
         silk: "cubic-bezier(0.16, 1, 0.3, 1)",

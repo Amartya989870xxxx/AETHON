@@ -82,7 +82,7 @@ export function DataTable<Row>({
                   className={cx(
                     "border-b border-white/5 transition-colors",
                     onRowClick && "cursor-pointer hover:bg-white/[0.04]",
-                    activeKey === key && "bg-violet-500/10",
+                    activeKey === key && "bg-accent-500/10",
                   )}
                 >
                   {columns.map((col) => (

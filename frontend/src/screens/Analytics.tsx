@@ -255,7 +255,7 @@ function SegmentTrend({ segments }: { segments: string[] }) {
       <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
         <h3 className="eyebrow">Segment trend</h3>
         <div className="flex items-center gap-3">
-          <Legend swatch="#8b5cf6" label="Congestion %" />
+          <Legend swatch="#22d3ee" label="Congestion %" />
           <Legend swatch="#5cd0c0" label="Speed km/h" />
           <Select
             value={segment}
@@ -295,8 +295,8 @@ function SegmentTrend({ segments }: { segments: string[] }) {
             >
               <defs>
                 <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.45} />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.02} />
+                  <stop offset="0%" stopColor="#22d3ee" stopOpacity={0.45} />
+                  <stop offset="100%" stopColor="#22d3ee" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
               <CartesianGrid stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -309,7 +309,7 @@ function SegmentTrend({ segments }: { segments: string[] }) {
               />
               <YAxis
                 yAxisId="pct"
-                tick={{ fill: "#8b5cf6", fontSize: 10 }}
+                tick={{ fill: "#22d3ee", fontSize: 10 }}
                 tickLine={false}
                 axisLine={false}
                 width={34}
@@ -338,7 +338,7 @@ function SegmentTrend({ segments }: { segments: string[] }) {
                 type="monotone"
                 dataKey="congestion"
                 name="Congestion"
-                stroke="#8b5cf6"
+                stroke="#22d3ee"
                 strokeWidth={2}
                 fill="url(#cg)"
                 unit="%"
@@ -426,7 +426,7 @@ function ODMatrixView({ data }: { data: ODMatrix }) {
                       style={{
                         background: cell.isDiagonal
                           ? "rgba(255,255,255,0.02)"
-                          : `rgba(139,92,246,${0.08 + intensity * 0.5})`,
+                          : `rgba(34,211,238,${0.08 + intensity * 0.5})`,
                         color: intensity > 0.5 ? "#fff" : "#c4c8d4",
                       }}
                     >

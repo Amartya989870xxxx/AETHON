@@ -14,9 +14,9 @@ import { formatLocal } from "../lib/datetime";
 import type { AuditEntry } from "../api/types";
 
 const ACTION_COLORS: Record<string, string> = {
-  trajectory_query: "#d946ef",
+  trajectory_query: "#3b82f6",
   alert_acknowledged: "#4ade80",
-  alert_raised: "#8b5cf6",
+  alert_raised: "#22d3ee",
   blacklist_add: "#ff8f4c",
   blacklist_remove: "#5b6070",
 };
@@ -90,7 +90,7 @@ export function AuditScreen() {
           Object.keys(e.detail).length > 0 ? (
             <button
               onClick={() => setExpanded(expanded === e.id ? null : e.id)}
-              className="text-[11px] text-violet-400 hover:text-violet-300"
+              className="text-[11px] text-accent-400 hover:text-accent-300"
             >
               {expanded === e.id ? "hide" : "detail"}
             </button>

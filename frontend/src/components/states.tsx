@@ -9,7 +9,7 @@ export function Spinner({ className }: { className?: string }) {
   return (
     <span
       className={cx(
-        "inline-block h-4 w-4 animate-spin rounded-full border-2 border-ink-500 border-t-violet-500",
+        "inline-block h-4 w-4 animate-spin rounded-full border-2 border-ink-500 border-t-accent-500",
         className,
       )}
       role="status"
@@ -105,7 +105,7 @@ export function ErrorState({ error, onRetry, bare }: ErrorProps) {
       {onRetry && (
         <button
           onClick={onRetry}
-          className="mt-3 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-ink-200 transition hover:border-violet-500/40 hover:text-white"
+          className="mt-3 rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-ink-200 transition hover:border-accent-500/40 hover:text-white"
         >
           Try again
         </button>

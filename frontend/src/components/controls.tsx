@@ -29,9 +29,9 @@ export function Button({
         "disabled:cursor-not-allowed disabled:opacity-50",
         size === "sm" ? "px-2.5 py-1.5 text-xs" : "px-3.5 py-2 text-sm",
         variant === "primary" &&
-          "border-violet-500/50 bg-violet-500/15 text-violet-400 hover:border-violet-400 hover:bg-violet-500/25 hover:text-white hover:shadow-glow",
+          "border-accent-500/50 bg-accent-500/15 text-accent-400 hover:border-accent-400 hover:bg-accent-500/25 hover:text-white hover:shadow-glow",
         variant === "ghost" &&
-          "border-white/10 bg-white/5 text-ink-200 hover:border-violet-500/40 hover:text-white",
+          "border-white/10 bg-white/5 text-ink-200 hover:border-accent-500/40 hover:text-white",
         variant === "danger" &&
           "border-signal-critical/40 bg-signal-critical/10 text-signal-critical hover:border-signal-critical/70 hover:bg-signal-critical/20",
         className,
@@ -65,7 +65,7 @@ export function Field({
 }
 
 const inputBase =
-  "w-full rounded-lg border border-white/10 bg-ink-900/70 px-3 py-2 text-sm text-ink-100 outline-none transition placeholder:text-ink-500 focus:border-violet-500/60 focus:bg-ink-900 focus:ring-2 focus:ring-violet-500/20";
+  "w-full rounded-lg border border-white/10 bg-ink-900/70 px-3 py-2 text-sm text-ink-100 outline-none transition placeholder:text-ink-500 focus:border-accent-500/60 focus:bg-ink-900 focus:ring-2 focus:ring-accent-500/20";
 
 export function TextInput({
   className,
@@ -108,7 +108,7 @@ export function SegmentedControl<T extends string>({
           className={cx(
             "rounded-[7px] px-3 py-1.5 text-xs font-medium transition-all duration-300 ease-silk",
             value === opt.value
-              ? "bg-violet-500/20 text-white shadow-glow"
+              ? "bg-accent-500/20 text-white shadow-glow"
               : "text-ink-400 hover:text-ink-200",
           )}
         >

@@ -55,7 +55,7 @@ function Sidebar({ liveAlertCount }: { liveAlertCount: number }) {
               cx(
                 "group relative flex items-center gap-3 rounded-xl border px-3 py-2.5 text-[13px] font-medium tracking-wide transition-all duration-300 ease-silk",
                 isActive
-                  ? "border-violet-500/40 bg-violet-500/[0.12] text-white shadow-[0_0_24px_rgba(139,92,246,0.18)]"
+                  ? "border-accent-400/40 bg-accent-500/[0.16] text-accent-300 shadow-[0_0_24px_rgba(34,211,238,0.22)]"
                   : "border-transparent text-ink-400 hover:border-white/10 hover:bg-white/[0.04] hover:text-ink-100",
               )
             }
@@ -70,14 +70,14 @@ function Sidebar({ liveAlertCount }: { liveAlertCount: number }) {
                 />
                 <span className="flex-1">{label}</span>
                 {to === "/alerts" && liveAlertCount > 0 && (
-                  <span className="rounded-full bg-violet-500/25 px-1.5 py-0.5 text-[10px] font-semibold text-violet-300">
+                  <span className="rounded-full bg-accent-500/25 px-1.5 py-0.5 text-[10px] font-semibold text-accent-300">
                     {liveAlertCount}
                   </span>
                 )}
                 {isActive && (
                   <motion.span
                     layoutId="nav-active-edge"
-                    className="absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/70 to-transparent"
+                    className="absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/70 to-transparent"
                   />
                 )}
               </>
@@ -98,9 +98,9 @@ function Sidebar({ liveAlertCount }: { liveAlertCount: number }) {
 function Brand() {
   return (
     <div className="flex items-center gap-2.5 px-2">
-      <span className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-violet-500/40 bg-violet-500/15">
-        <span className="absolute h-1.5 w-1.5 rounded-full bg-violet-400" />
-        <span className="absolute h-1.5 w-1.5 animate-pulse-ring rounded-full bg-violet-400" />
+      <span className="relative flex h-8 w-8 items-center justify-center rounded-lg border border-accent-400/50 bg-accent-500/20 shadow-[0_0_16px_rgba(34,211,238,0.25)]">
+        <span className="absolute h-2 w-2 rounded-full bg-accent-300 shadow-[0_0_6px_rgba(34,211,238,0.9)]" />
+        <span className="absolute h-2 w-2 animate-pulse-ring rounded-full bg-accent-400" />
       </span>
       <div className="leading-tight">
         <p className="text-sm font-semibold tracking-tight text-ink-100">
@@ -118,7 +118,7 @@ function TopBar({ socketStatus }: { socketStatus: SocketStatus }) {
   return (
     <div className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-white/[0.06] bg-ink-950/70 px-4 backdrop-blur-xl sm:px-8">
       <div className="flex items-center gap-2 lg:hidden">
-        <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
+        <span className="h-1.5 w-1.5 rounded-full bg-accent-400" />
         <span className="text-sm font-semibold tracking-tight">AETHON</span>
       </div>
       <div className="hidden text-xs text-ink-500 lg:block">
@@ -165,14 +165,14 @@ export function MobileNav({ liveAlertCount }: { liveAlertCount: number }) {
           className={({ isActive }) =>
             cx(
               "relative flex flex-1 flex-col items-center gap-0.5 py-2 text-[10px] font-medium transition-colors",
-              isActive ? "text-violet-300" : "text-ink-500",
+              isActive ? "text-accent-300" : "text-ink-500",
             )
           }
         >
           <Icon width={17} height={17} />
           {label.split(" ")[0]}
           {to === "/alerts" && liveAlertCount > 0 && (
-            <span className="absolute right-2 top-1 h-1.5 w-1.5 rounded-full bg-violet-400" />
+            <span className="absolute right-2 top-1 h-1.5 w-1.5 rounded-full bg-accent-400" />
           )}
         </NavLink>
       ))}

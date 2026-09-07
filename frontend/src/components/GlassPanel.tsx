@@ -2,7 +2,7 @@ import { forwardRef, type HTMLAttributes } from "react";
 import { cx } from "../lib/cx";
 
 type Props = HTMLAttributes<HTMLDivElement> & {
-  /** Adds the violet-glow hover lift. */
+  /** Adds the accent-glow hover lift. */
   interactive?: boolean;
   /** Removes default padding (for maps / tables that bleed to the edge). */
   flush?: boolean;

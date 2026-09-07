@@ -12,7 +12,7 @@ interface Props {
 }
 
 /** Slim horizontal bar for a 0..1 score (confidence, congestion, hop score). */
-export function Meter({ value, color = "#8b5cf6", showValue, className, label }: Props) {
+export function Meter({ value, color = "#22d3ee", showValue, className, label }: Props) {
   const v = clamp01(value);
   const known = value != null && !Number.isNaN(value);
   return (

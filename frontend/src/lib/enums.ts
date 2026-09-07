@@ -39,7 +39,7 @@ export const SEVERITY_STYLE: Record<string, EnumStyle> = {
 // --- alert status ---------------------------------------------------
 
 export const ALERT_STATUS_STYLE: Record<string, EnumStyle> = {
-  open: style("Open", "#8b5cf6"),
+  open: style("Open", "#22d3ee"),
   acknowledged: style("Acknowledged", "#4ade80"),
   dismissed: style("Dismissed", "#5b6070"),
 };
@@ -49,7 +49,7 @@ export const ALERT_STATUS_STYLE: Record<string, EnumStyle> = {
 export const ALERT_TYPE_STYLE: Record<string, EnumStyle> = {
   blacklist_hit: style("Blacklist Hit", "#fb5b6b"),
   blacklist_possible: style("Blacklist — Possible", "#ff8f4c"),
-  impossible_travel: style("Impossible Travel", "#d946ef"),
+  impossible_travel: style("Impossible Travel", "#3b82f6"),
   restricted_zone: style("Restricted Zone", "#ff8f4c"),
   loitering: style("Loitering", "#ffcc4d"),
   odd_hours: style("Odd Hours", "#5cd0c0"),
@@ -60,8 +60,8 @@ export const ALERT_TYPE_STYLE: Record<string, EnumStyle> = {
 export const CONDITION_STYLE: Record<string, EnumStyle> = {
   day_clear: style("Day · Clear", "#5cd0c0"),
   day_rain: style("Day · Rain", "#6bb6ff"),
-  night_clear: style("Night · Clear", "#8b5cf6"),
-  night_rain: style("Night · Rain", "#a855f7"),
+  night_clear: style("Night · Clear", "#22d3ee"),
+  night_rain: style("Night · Rain", "#38bdf8"),
   glare: style("Glare", "#ffcc4d"),
   angled: style("Angled", "#ff8f4c"),
 };

@@ -29,7 +29,7 @@ const KIND_STYLES: Record<ToastKind, string> = {
   info: "border-white/10",
   success: "border-signal-ok/40",
   error: "border-signal-critical/40",
-  alert: "border-violet-500/50",
+  alert: "border-accent-500/50",
 };
 
 export function ToastProvider({ children }: { children: ReactNode }) {

@@ -147,7 +147,7 @@ export function WatchlistScreen() {
                 type="checkbox"
                 checked={activeOnly}
                 onChange={(e) => setActiveOnly(e.target.checked)}
-                className="accent-violet-500"
+                className="accent-accent-500"
               />
               active only
             </label>

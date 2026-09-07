@@ -284,7 +284,7 @@ function MapLegend({
           onClick={() =>
             onColorMode(colorMode === "boolean" ? "score" : "boolean")
           }
-          className="text-[10px] text-violet-400 hover:text-violet-300"
+          className="text-[10px] text-accent-400 hover:text-accent-300"
         >
           {colorMode === "boolean" ? "gradient" : "on / off"}
         </button>

@@ -190,7 +190,7 @@ export function AlertsScreen() {
                   onClick={() => setStatus(s)}
                   className={`rounded-[7px] px-3 py-1.5 text-xs font-medium capitalize transition ${
                     status === s
-                      ? "bg-violet-500/20 text-white"
+                      ? "bg-accent-500/20 text-white"
                       : "text-ink-400 hover:text-ink-200"
                   }`}
                 >
@@ -290,7 +290,7 @@ function StatsRow({
       <StatTile
         label="Open"
         value={loading ? "…" : (stats?.open ?? 0)}
-        accent={stats?.open ? "#8b5cf6" : undefined}
+        accent={stats?.open ? "#22d3ee" : undefined}
       />
       <StatTile
         label="Reviewed"
@@ -320,8 +320,8 @@ function AlertRow({
       onClick={onClick}
       className={`w-full rounded-lg border px-3 py-2.5 text-left transition-all duration-300 ease-silk ${
         active
-          ? "border-violet-500/50 bg-violet-500/10"
-          : "border-white/[0.06] bg-white/[0.02] hover:border-violet-500/30 hover:bg-white/[0.04]"
+          ? "border-accent-500/50 bg-accent-500/10"
+          : "border-white/[0.06] bg-white/[0.02] hover:border-accent-500/30 hover:bg-white/[0.04]"
       }`}
     >
       <div className="flex items-start justify-between gap-3">

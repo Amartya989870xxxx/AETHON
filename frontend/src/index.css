@@ -43,11 +43,11 @@
   }
 
   ::selection {
-    background-color: #8b5cf6;
+    background-color: #22d3ee;
     color: #fff;
   }
   ::-moz-selection {
-    background-color: #8b5cf6;
+    background-color: #22d3ee;
     color: #fff;
   }
 }
@@ -130,7 +130,7 @@
 }
 
 .leaflet-tile {
-  /* Turn the light keyless OSM basemap into a muted night map so the violet
+  /* Turn the light keyless OSM basemap into a muted night map so the cyan
      data overlays read clearly on top. */
   filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9)
     saturate(0.55);

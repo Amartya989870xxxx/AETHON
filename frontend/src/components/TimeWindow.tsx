@@ -112,7 +112,7 @@ export function TimeWindowPicker() {
               <button
                 key={p.label}
                 onClick={() => applyPreset(p.hours)}
-                className="flex-1 rounded-md border border-white/10 bg-white/5 py-1.5 text-xs text-ink-200 transition hover:border-violet-500/40 hover:text-white"
+                className="flex-1 rounded-md border border-white/10 bg-white/5 py-1.5 text-xs text-ink-200 transition hover:border-accent-500/40 hover:text-white"
               >
                 {p.label}
               </button>
@@ -158,7 +158,7 @@ export function TimeWindowPicker() {
             </button>
             <button
               onClick={() => setOpen(false)}
-              className="text-xs text-violet-400 transition hover:text-violet-300"
+              className="text-xs text-accent-400 transition hover:text-accent-300"
             >
               Done
             </button>

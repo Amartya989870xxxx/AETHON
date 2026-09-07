@@ -178,8 +178,8 @@ function SearchResults({
               onClick={() => onPick(m.plate)}
               className={`w-full rounded-lg border px-3 py-2 text-left transition-all duration-300 ease-silk ${
                 activePlate === m.plate
-                  ? "border-violet-500/50 bg-violet-500/10"
-                  : "border-white/[0.06] bg-white/[0.02] hover:border-violet-500/30 hover:bg-white/[0.04]"
+                  ? "border-accent-500/50 bg-accent-500/10"
+                  : "border-white/[0.06] bg-white/[0.02] hover:border-accent-500/30 hover:bg-white/[0.04]"
               }`}
             >
               <div className="flex items-center justify-between">
@@ -230,7 +230,7 @@ function TrajectoryResult({
         <StatTile
           label="Route score"
           value={pct(data.score)}
-          accent="#8b5cf6"
+          accent="#22d3ee"
           hint={data.fuzzy_used ? "fuzzy match used" : "exact plate match"}
         />
         <StatTile
@@ -260,8 +260,8 @@ function TrajectoryResult({
                   center={nodeLatLngs[0]}
                   radius={9}
                   pathOptions={{
-                    color: "#8b5cf6",
-                    fillColor: "#8b5cf6",
+                    color: "#22d3ee",
+                    fillColor: "#22d3ee",
                     fillOpacity: 0.6,
                   }}
                 >
@@ -285,7 +285,7 @@ function TrajectoryResult({
             <MapView bounds={bounds}>
               <Polyline
                 positions={line}
-                pathOptions={{ color: "#8b5cf6", weight: 3, opacity: 0.9 }}
+                pathOptions={{ color: "#22d3ee", weight: 3, opacity: 0.9 }}
               />
               {bridged.map((hopIdx) => {
                 const hop = data.hops[hopIdx];
@@ -316,8 +316,8 @@ function TrajectoryResult({
                     center={c}
                     radius={isEnd ? 8 : 5}
                     pathOptions={{
-                      color: isEnd ? "#d946ef" : "#8b5cf6",
-                      fillColor: isEnd ? "#d946ef" : "#8b5cf6",
+                      color: isEnd ? "#3b82f6" : "#22d3ee",
+                      fillColor: isEnd ? "#3b82f6" : "#22d3ee",
                       fillOpacity: 0.7,
                       weight: 2,
                     }}
@@ -437,7 +437,7 @@ function HopsTable({
       key: "score",
       header: "Score",
       width: "w-40",
-      cell: (h) => <Meter value={h.total} showValue color="#8b5cf6" />,
+      cell: (h) => <Meter value={h.total} showValue color="#22d3ee" />,
     },
   ];
   return (
