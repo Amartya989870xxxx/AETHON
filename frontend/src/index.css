@@ -1,0 +1,170 @@
+@import "@fontsource-variable/inter";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   Base — Argus-flavoured dark ground
+   ===================================================================== */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply font-sans text-ink-100 antialiased;
+    background:
+      radial-gradient(
+          52vmax 38vmax at 50% -8%,
+          #191b21 0%,
+          #0e0f13 34%,
+          #050506 64%,
+          #000 92%
+        )
+        #000;
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: #22d3ee;
+    color: #fff;
+  }
+  ::-moz-selection {
+    background-color: #22d3ee;
+    color: #fff;
+  }
+}
+
+/* =====================================================================
+   Components — the glass system
+   ===================================================================== */
+@layer components {
+  /* Premium glass panel with an illuminated top edge, lifted from the
+     Argus dock capsule. */
+  .glass {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0) 42%
+      ),
+      rgba(16, 17, 22, 0.82);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.45),
+      inset 0 1px rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0.01) 55%,
+      transparent 100%
+    );
+    z-index: 0;
+  }
+
+  .glass > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .glass-hover {
+    transition:
+      border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-hover:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.55),
+      0 0 30px rgba(139, 92, 246, 0.18),
+      inset 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Uppercase, letter-spaced label — the Argus nav treatment. */
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    font-weight: 500;
+    color: theme("colors.ink.400");
+  }
+}
+
+/* =====================================================================
+   Leaflet — desaturated dark basemap so data overlays read on top
+   ===================================================================== */
+.leaflet-container {
+  background: #050506;
+  font: inherit;
+}
+
+.leaflet-tile {
+  /* Turn the light keyless OSM basemap into a muted night map so the cyan
+     data overlays read clearly on top. */
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9)
+    saturate(0.55);
+}
+
+.leaflet-bar,
+.leaflet-control-attribution {
+  background: rgba(14, 15, 19, 0.85) !important;
+  color: #5b6070 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(8px);
+}
+
+.leaflet-bar a {
+  background: rgba(20, 21, 26, 0.9) !important;
+  color: #c4c8d4 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.leaflet-bar a:hover {
+  background: rgba(139, 92, 246, 0.2) !important;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(16, 17, 22, 0.96);
+  color: #e7e9f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(18px);
+}
+.leaflet-popup-content {
+  margin: 12px 14px;
+  font: inherit;
+}
+.leaflet-popup-close-button {
+  color: #5b6070 !important;
+}
