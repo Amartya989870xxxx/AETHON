@@ -336,6 +336,16 @@ class TrajectoryEngine:
         result.found = True
         result.path = [self._path_node(sightings[k]) for k in chain]
         result.hops = [best_hop[k] for k in chain[1:] if best_hop[k]]
+        # `Hop.from_index`/`to_index` were set during DP scoring against the
+        # full candidate pool (`sightings`), not against `result.path` — the
+        # two use different numbering. A consumer reading this response has
+        # only `path`, so a hop must point into *that* array: hop m always
+        # connects path[m] to path[m+1] by construction (hops are selected in
+        # chain order above), so re-index on that invariant rather than
+        # leaving internal bookkeeping indices in the public response.
+        for m, hop in enumerate(result.hops):
+            hop.from_index = m
+            hop.to_index = m + 1
         result.total_distance_km = sum(h.distance_km for h in result.hops)
         result.duration_seconds = (sightings[chain[-1]].ts - sightings[chain[0]].ts).total_seconds()
         # Report mean score per hop so a long trajectory is not flattered by

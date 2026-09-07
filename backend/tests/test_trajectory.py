@@ -125,6 +125,30 @@ def test_fuzzy_sightings_are_weighted_below_exact_ones(db, engine, city):
     assert exact["match"] == "exact" and fuzzy["match"].startswith("fuzzy")
 
 
+def test_hop_indices_point_into_the_returned_path_not_internal_candidates(db, engine, city):
+    """Regression guard.
+
+    Hop.from_index/to_index are scored during DP against the full candidate
+    pool, not against the final `path` array returned to callers. A consumer
+    (the frontend hops table) has only `path` to resolve a hop's camera IDs
+    against — if the indices reference the wrong array, `path[hop.from_index]`
+    silently returns the wrong node or None for any route with more than a
+    couple of hops. Every hop must satisfy hops[m] connects path[m] -> path[m+1].
+    """
+    add_obs(db, "C15", 0, direction="southeast")
+    add_obs(db, "C01", 180, direction="east")
+    add_obs(db, "C02", 400, direction="east")
+    add_obs(db, "C03", 900, direction="east")
+    r = engine.reconstruct("DL4CAF3125", *window())
+    assert len(r.hops) == len(r.path) - 1
+    for m, hop in enumerate(r.hops):
+        assert hop.from_index == m
+        assert hop.to_index == m + 1
+        from_cam = r.path[hop.from_index]["camera_id"]
+        to_cam = r.path[hop.to_index]["camera_id"]
+        assert from_cam is not None and to_cam is not None
+
+
 def test_persist_writes_a_row_only_for_real_routes(db, engine, city):
     add_obs(db, "C01", 0)
     assert engine.persist(engine.reconstruct("DL4CAF3125", *window())) is None
