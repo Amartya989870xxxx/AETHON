@@ -49,7 +49,7 @@ def main() -> int:
         return 1
 
     total_obs = db.query(Observation).count()
-    print(f"{BOLD}PlateTrail verification{OFF}  ·  {len(graph.nodes)} cameras  ·  "
+    print(f"{BOLD}AETHON verification{OFF}  ·  {len(graph.nodes)} cameras  ·  "
           f"{total_obs:,} observations  ·  {db.query(Alert).count()} alerts")
 
     # ---------------- Component 1 ----------------

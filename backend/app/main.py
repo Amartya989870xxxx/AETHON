@@ -1,4 +1,4 @@
-"""PlateTrail API service.
+"""AETHON API service.
 
 One AI layer over a city's existing camera network, exposing the four
 deliverables of SIH 2026 PS 26127 through a single HTTP/WebSocket surface:

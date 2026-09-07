@@ -94,7 +94,12 @@ def test_trajectory_queries_are_always_audited(client):
     """Identity-sensitive lookups must leave a trace naming who ran them."""
     post_obs(client, "C01", 0)
     client.get("/api/trajectory/DL4CAF3125", params={**WINDOW, "actor": "si_kumar"})
-    entries = client.get("/api/audit", params={**WINDOW, "action": "trajectory_query"}).json()
+    # The audit entry is stamped with real wall-clock time (that's the whole
+    # point of an audit log), not the fixture's fixed T0 — so this query must
+    # NOT use WINDOW (anchored to T0=2026-09-07) or it silently misses the
+    # entry on any day, and any time after 16:00 UTC, other than by luck.
+    # Omitting start/end defaults to "last 24h from real now" server-side.
+    entries = client.get("/api/audit", params={"action": "trajectory_query"}).json()
     assert entries["count"] == 1
     assert entries["entries"][0]["actor"] == "si_kumar"
     assert entries["entries"][0]["subject"] == "DL4CAF3125"

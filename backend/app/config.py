@@ -93,10 +93,10 @@ class AlertConfig:
 
 @dataclass(frozen=True)
 class Settings:
-    app_name: str = "PlateTrail"
+    app_name: str = "AETHON"
     version: str = "0.1.0"
     ps_id: str = "26127"
-    database_url: str = os.getenv("DATABASE_URL", f"sqlite:///{DATA_DIR/'platetrail.db'}")
+    database_url: str = os.getenv("DATABASE_URL", f"sqlite:///{DATA_DIR/'aethon.db'}")
     # Raw imagery retention (privacy): frames are dropped after this.
     frame_retention_seconds: int = _i("FRAME_RETENTION_S", 3600)
     anpr: ANPRConfig = field(default_factory=ANPRConfig)
