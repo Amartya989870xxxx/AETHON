@@ -6,3 +6,6 @@ dist-ssr
 .env
 .env.*.local
 coverage
+
+# TS incremental build cache
+*.tsbuildinfo
